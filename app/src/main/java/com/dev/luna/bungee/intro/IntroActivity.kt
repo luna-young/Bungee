@@ -4,13 +4,8 @@ import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import com.dev.luna.bungee.api.BungeeApi
-import com.dev.luna.bungee.signup.SignupActivity
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.anko.setContentView
-import org.jetbrains.anko.startActivity
 import java.lang.Exception
 
 class IntroActivity : Activity() {
@@ -22,10 +17,13 @@ class IntroActivity : Activity() {
         val ui = IntroActivityUI()
         ui.setContentView(this)
 
-        GlobalScope.launch {
-            delay(1000)
-            startActivity<SignupActivity>()
-            finish()
+        runBlocking {
+            try {
+                val response = BungeeApi.instance.hello()
+                Log.d(TAG, response.data)
+            } catch (e: Exception) {
+                Log.e(TAG, "Hello Api 호출 오류", e)
+            }
         }
 
     }
