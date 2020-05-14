@@ -10,6 +10,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.startActivity
 import java.lang.Exception
 
 class IntroActivity : Activity() {
@@ -26,5 +27,6 @@ class IntroActivity : Activity() {
             startActivity<SignupActivity>()
             finish()
 
+        }
     }
 }
