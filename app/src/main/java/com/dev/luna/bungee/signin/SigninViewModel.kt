@@ -7,18 +7,32 @@ import com.dev.luna.bungee.api.BungeeApi
 import com.dev.luna.bungee.api.request.SigninRequest
 import com.dev.luna.bungee.api.response.SigninResponse
 import com.dev.luna.bungee.common.Prefs
+import com.dev.luna.bungee.product.ProductMainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import net.codephobia.ankomvvm.lifecycle.BaseViewModel
+import org.jetbrains.anko.error
+import java.lang.Exception
 
 class SigninViewModel (app: Application) : BaseViewModel(app) {
 
+    private val TAG = SigninViewModel::class.simpleName
     val email = MutableLiveData("")
     val password = MutableLiveData("")
 
     suspend fun signin() {
         val request = SigninRequest(email.value, password.value)
 
+        if(isNotValidSignin(request))
+            return
+
+        try {
+            val response = requestSignin(request)
+            onSigninResponse(response)
+        } catch (e: Exception) {
+            error("signin error", e)
+            toast("알 수 없는 에러가 발생했습니다.")
+        }
     }
 
     private fun isNotValidSignin(request: SigninRequest) =
@@ -48,7 +62,8 @@ class SigninViewModel (app: Application) : BaseViewModel(app) {
             Prefs.userId = response.data.userId
 
             toast("로그인되었습니다.")
-            //todo 상품리스트 화면으로 이동
+
+            startActivityAndFinish<ProductMainActivity>()
         }
         else {
             toast(response.message ?: "알 수 없는 오류가 발생했습니다.")

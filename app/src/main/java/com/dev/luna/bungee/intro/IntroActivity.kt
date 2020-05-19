@@ -4,6 +4,8 @@ import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import com.dev.luna.bungee.api.BungeeApi
+import com.dev.luna.bungee.common.Prefs
+import com.dev.luna.bungee.product.ProductMainActivity
 import com.dev.luna.bungee.signin.SigninActivity
 import com.dev.luna.bungee.signup.SignupActivity
 import kotlinx.coroutines.GlobalScope
@@ -25,7 +27,16 @@ class IntroActivity : Activity() {
 
         GlobalScope.launch {
             delay(1000)
-            startActivity<SigninActivity>()
+
+            if(Prefs.token.isNullOrEmpty()) {
+                Log.d(TAG, "토큰 없음")
+                 startActivity<SigninActivity>()
+            }
+            else {
+                Log.d(TAG, "상품 메인화면 띄우기")
+              startActivity<ProductMainActivity>()
+            }
+
             finish()
 
         }

@@ -3,6 +3,7 @@ package com.dev.luna.bungee.signin
 import android.graphics.Color
 import android.graphics.Typeface
 import android.text.InputType
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
@@ -18,6 +19,8 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 class SigninActivityUI (
         private val viewModel: SigninViewModel
 ) : AnkoComponent<SigninActivity> {
+
+    private val TAG = SigninActivityUI::class.simpleName;
 
     override fun createView(ui: AnkoContext<SigninActivity>) = ui.linearLayout {
         orientation = LinearLayout.VERTICAL
@@ -62,7 +65,9 @@ class SigninActivityUI (
         button("로그인") {
             backgroundColorResource = R.color.colorPrimary
             textColorResource = R.color.white
-            onClick { viewModel.signin() }
+            onClick {
+                Log.d(TAG, "로그인 버튼 클릭")
+                viewModel.signin() }
         }.lparams(width = matchParent)
 
         button("회원가입") {

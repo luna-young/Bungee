@@ -1,6 +1,7 @@
 package com.dev.luna.bungee.signup
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.dev.luna.bungee.api.ApiResponse
 import com.dev.luna.bungee.api.BungeeApi
@@ -15,6 +16,8 @@ class SignupViewModel(app: Application) : BaseViewModel(app) {
     val email = MutableLiveData("")
     val name = MutableLiveData("")
     val password = MutableLiveData("")
+
+    private val TAG = SignupViewModel::class.simpleName
 
     suspend fun signup() {
         val request = SignupRequest(email.value, password.value, name.value)
@@ -60,6 +63,7 @@ class SignupViewModel(app: Application) : BaseViewModel(app) {
             finishActivity()
         }
         else {
+            Log.e(TAG, "error onSignupResponse")
             toast(response.message?: "알 수 없는 오류가 발생했습니다.")
         }
     }
