@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import com.dev.luna.bungee.api.BungeeApi
+import com.dev.luna.bungee.signin.SigninActivity
 import com.dev.luna.bungee.signup.SignupActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -24,7 +25,7 @@ class IntroActivity : Activity() {
 
         GlobalScope.launch {
             delay(1000)
-            startActivity<SignupActivity>()
+            startActivity<SigninActivity>()
             finish()
 
         }
