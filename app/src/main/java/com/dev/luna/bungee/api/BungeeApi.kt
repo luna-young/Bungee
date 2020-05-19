@@ -13,7 +13,7 @@ interface BungeeApi {
     suspend fun hello(): ApiResponse<String>
     //api 인터페이스를 suspend 함수로 선언 -> 비동기 호출 사용(retrofit 2.6.0 부터는 코틀린 코루틴을 지원함)
 
-    @GET("/api/v1/users")
+    @POST("/api/v1/users")
     suspend fun signup(@Body signupRequest: SignupRequest)
         : ApiResponse<Void>
 
