@@ -1,8 +1,11 @@
 package com.dev.luna.bungee.api
 
+import com.dev.luna.bungee.api.request.SigninRequest
 import com.dev.luna.bungee.api.request.SignupRequest
+import com.dev.luna.bungee.api.response.SigninResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface BungeeApi {
 
@@ -13,6 +16,10 @@ interface BungeeApi {
     @GET("/api/v1/users")
     suspend fun signup(@Body signupRequest: SignupRequest)
         : ApiResponse<Void>
+
+    @POST("/api/v1/signin")
+    suspend fun signin(@Body signinRequest: SigninRequest)
+    :ApiResponse<SigninResponse>
 
     companion object {
         val instance = ApiGenerator()
