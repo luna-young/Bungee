@@ -53,7 +53,7 @@ class ProductMainUI(
                        add(NONE, MENU_ID_INQUIRY, NONE, "내 문의").apply {
                            setIcon(R.drawable.ic_chat)
                        }
-                       add(NONE, MENU_ID_INQUIRY, NONE, "로그아웃").apply {
+                       add(NONE, MENU_ID_LOGOUT, NONE, "로그아웃").apply {
                            setIcon(R.drawable.ic_signout)
                        }
                    }
