@@ -13,6 +13,7 @@ import com.dev.luna.bungee.common.Prefs
 import com.dev.luna.bungee.signin.SigninActivity
 import com.google.android.material.navigation.NavigationView
 import org.jetbrains.anko.appcompat.v7.toolbar
+import org.jetbrains.anko.design.floatingActionButton
 import org.jetbrains.anko.design.navigationView
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.drawerLayout
@@ -30,18 +31,30 @@ class ProductMainUI(
            ui.drawerLayout {
                drawerLayout = this
 
-               verticalLayout {
-                   toolBar = toolbar {
+               frameLayout {
+                   verticalLayout {
+                       toolBar = toolbar {
 
-                       title = "Bungee"
-                       bottomPadding = dip(1)
-                       background = borderBottom(width = dip(1))
+                           title = "Bungee"
+                           bottomPadding = dip(1)
+                           background = borderBottom(width = dip(1))
 
-                       menu.add("Search")
-                           .setIcon(R.drawable.ic_search)
-                           .setShowAsAction(SHOW_AS_ACTION_ALWAYS)
-                   }.lparams(matchParent, wrapContent)
-               }.lparams(matchParent, matchParent)
+                           menu.add("Search")
+                                   .setIcon(R.drawable.ic_search)
+                                   .setShowAsAction(SHOW_AS_ACTION_ALWAYS)
+                       }.lparams(matchParent, wrapContent)
+                   }.lparams(matchParent, matchParent)
+
+                   floatingActionButton {
+                       imageResource = R.drawable.ic_add
+                       onClick { viewModel.openRegistrationActivity() }
+                   }.lparams {
+                       bottomMargin = dip(20)
+                       marginEnd = dip(20)
+                       gravity = Gravity.END or Gravity.BOTTOM
+                   }
+
+               }
 
                navigationView = navigationView {
                    ProductMainNavHeader()
