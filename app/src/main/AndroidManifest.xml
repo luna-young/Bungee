@@ -5,9 +5,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_elephant_64"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_elephant_64"
         android:supportsRtl="true"
         android:name=".App"
         android:usesCleartextTraffic="true"
@@ -21,5 +21,8 @@
         <activity android:name=".signup.SignupActivity" />
         <activity android:name=".signin.SigninActivity" />
         <activity android:name=".product.ProductMainActivity" />
+        <activity android:name=".product.registration.ProductRegistrationActivity"
+                android:theme="@style/Theme.AppCompat.Light"/>
+
     </application>
 </manifest>
