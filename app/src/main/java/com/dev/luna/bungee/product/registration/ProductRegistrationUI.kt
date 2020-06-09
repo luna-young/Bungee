@@ -2,6 +2,7 @@ package com.dev.luna.bungee.product.registration
 
 import android.graphics.Color
 import android.text.InputType
+import android.util.Log
 import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -21,6 +22,8 @@ import org.jetbrains.anko.sdk27.coroutines.textChangedListener
 class ProductRegistrationUI(
         private val viewModel: ProductRegistrationViewModel
 ) : AnkoComponent<ProductRegistrationActivity> {
+
+    val TAG = ProductRegistrationUI::class.java.simpleName
 
     override fun createView(ui: AnkoContext<ProductRegistrationActivity>)
     = ui.scrollView {
@@ -105,7 +108,7 @@ class ProductRegistrationUI(
                 backgroundColor = 0xEEEEEEEE.toInt()
 
                 spinner {
-                    //bindStringEntries() 함수는 ARrayAdapter를 이용해 MutableLiveData<List<String>> 타입의 데이터를 스피너에 바인딩해줌
+                    //bindStringEntries() 함수는 ArrayAdapter를 이용해 MutableLiveData<List<String>> 타입의 데이터를 스피너에 바인딩해줌
                     bindStringEntries(ui.owner, viewModel.categories)
 
                     onItemSelectedListener {
@@ -159,6 +162,10 @@ class ProductRegistrationUI(
         bindUrl(ui.owner, viewModel.imageUrls[imageNum]) {
             it?.let{
                 scaleType = ImageView.ScaleType.CENTER_CROP
+
+                Log.d(TAG, "@@이미지 it : $it")
+                Log.d(TAG, "@@이미지 주소: ${ApiGenerator.HOST}$it")
+
                 Glide.with(this)
                         .load("${ApiGenerator.HOST}$it")
                         .centerCrop()

@@ -26,7 +26,7 @@ interface BungeeApi {
     @Multipart //파일업로드가 필요한 api에는 해당 애너테이션을 붙여 이 요청의 바디가 multi-part임을 알려야 함
     @POST("/api/v1/product_images")
     suspend fun uploadProductImages (
-            @Part images: MultipartBody.Part //@Multipart로 설정된 api 요청의 파라미터들은 @Part 애너테이션을 붙여 이 파라미터가 multi-part욫ㅇ의 일부임을 알려야 함
+            @Part images: MultipartBody.Part //@Multipart로 설정된 api 요청의 파라미터들은 @Part 애너테이션을 붙여 이 파라미터가 multi-part의 일부임을 알려야 함
     ) : ApiResponse<ProductImageUploadResponse>
 
     @POST("/api/v1/products")

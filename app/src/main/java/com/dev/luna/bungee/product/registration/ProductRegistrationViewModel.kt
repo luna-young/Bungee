@@ -3,6 +3,7 @@ package com.dev.luna.bungee.product.registration
 import android.app.Activity.RESULT_OK
 import android.app.Application
 import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dev.luna.bungee.api.ApiResponse
@@ -15,6 +16,7 @@ import retrofit2.Response
 
 class ProductRegistrationViewModel (app: Application) : BaseViewModel(app) {
 
+    val TAG = ProductRegistrationViewModel::class.java.simpleName
     //이미지 업로드 후 반환받은 이미지 주소를 저장할 변수
     //주소가 입력되면 자동으로 이미지를 표시해주도록 데이터 바인딩을 이용하기 위해 List<MutableLiveData<String?>>으로 선언
     val imageUrls: List<MutableLiveData<String?>> = listOf(
@@ -103,8 +105,12 @@ class ProductRegistrationViewModel (app: Application) : BaseViewModel(app) {
             response: ApiResponse<ProductImageUploadResponse>
     ) {
         if(response.success && response.data != null) {
+
             imageUrls[currentImageNum].value = response.data.filePath
             imageIds[currentImageNum] = response.data.productImageId
+            Log.d(TAG, "@@response.data.filePath: ${response.data.filePath}")
+            Log.d(TAG, "@@response.data.productImageId: ${response.data.productImageId}")
+
         } else {
             toast(response.message ?: "알 수 없는 오류가 발생했습니다.")
         }

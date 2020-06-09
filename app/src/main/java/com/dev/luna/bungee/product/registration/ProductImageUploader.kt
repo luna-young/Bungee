@@ -1,5 +1,6 @@
 package com.dev.luna.bungee.product.registration
 
+import android.util.Log
 import com.dev.luna.bungee.api.ApiResponse
 import com.dev.luna.bungee.api.BungeeApi
 import com.dev.luna.bungee.api.response.ProductImageUploadResponse
@@ -15,9 +16,11 @@ import java.lang.Exception
 
 class ProductImageUploader: AnkoLogger {
 
+    val TAG = ProductImageUploader::class.java.simpleName
     //파일 객체를 받아 api요청에 맞는 파라미터를 생성하고 업로드 api 호출하는 함수
     //api를 호출하기 위해 suspend함수로 선언
     suspend fun upload(imageFile: File) = try {
+        Log.d(TAG, "----이미지 업로드 함수")
         val part = makeImagePart(imageFile)
         withContext(Dispatchers.IO) { //네트워크 요청이 일어나는 곳이기 때문에 IO스레드에서 수행되도록 해야
             BungeeApi.instance.uploadProductImages(part)
@@ -25,7 +28,7 @@ class ProductImageUploader: AnkoLogger {
     } catch (e: Exception) {
         error("상품 이미지 등록 오류", e)
         ApiResponse.error<ProductImageUploadResponse>(
-                "알 수 없는 오류가 발생했습니다."
+                "$TAG: 알 수 없는 오류가 발생했습니다."
         )
     }
 
