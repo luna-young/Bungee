@@ -24,10 +24,12 @@ class ProductListFragment : BaseFragment<ProductListViewModel>() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?): View? {
-        return AnkoContext.create(ctx, this).verticalLayout { //임시 ui 코드
-            textView(categoryId.toString())
-            textView(title)
-        }
+
+            val viewModel = getViewModel()
+            viewModel.categoryId = categoryId
+
+            return ProductListUI(viewModel)
+                    .createView(AnkoContext.create(ctx, this))
     }
 
     companion object {

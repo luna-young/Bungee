@@ -69,6 +69,8 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
+    implementation "androidx.paging:paging-runtime-ktx:2.1.2"
+
     //glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
 
