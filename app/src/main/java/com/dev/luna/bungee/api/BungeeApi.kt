@@ -5,6 +5,7 @@ import com.dev.luna.bungee.api.request.SigninRequest
 import com.dev.luna.bungee.api.request.SignupRequest
 import com.dev.luna.bungee.api.response.ProductImageUploadResponse
 import com.dev.luna.bungee.api.response.ProductListItemResponse
+import com.dev.luna.bungee.api.response.ProductResponse
 import com.dev.luna.bungee.api.response.SigninResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -41,6 +42,10 @@ interface BungeeApi {
             @Query("categoryId") categoryId: Int?,
             @Query("direction") direction: String // prev, next
     ): ApiResponse<List<ProductListItemResponse>>
+
+    @GET("/api/v1/products/{id}")
+    suspend fun getProduct(@Path("id") id: Long)
+        : ApiResponse<ProductResponse>
 
     companion object {
         val instance = ApiGenerator()

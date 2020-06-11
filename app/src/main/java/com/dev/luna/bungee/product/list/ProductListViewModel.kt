@@ -33,10 +33,10 @@ class ProductListViewModel(
     }
 
     override fun onClickProduct(productId: Long?) {
-        //startActivity<ProductDetailActivity> {
-          //  flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-            //putExtra(ProductDetailActivity.PRODUCT_ID, productId)
-        //}
+        startActivity<ProductDetailActivity> {
+            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+            putExtra(ProductDetailActivity.PRODUCT_ID, productId)
+        }
     }
 
 }
