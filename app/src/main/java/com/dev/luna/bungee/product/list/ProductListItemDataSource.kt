@@ -13,7 +13,8 @@ import kotlinx.coroutines.runBlocking
 import org.jetbrains.anko.toast
 
 class ProductListItemDataSource (
-        private val categoryId: Int?
+        private val categoryId: Int?,
+        private val keyword: String? = null
 ) : PageKeyedDataSource<Long, ProductListItemResponse>() { //PageKeyedDataSource를 상속받는 클래스. 초기 데이터를 로드하고, 이전/이후의 데이터를 로드하기 위한 콜백으로 구성
 
 
@@ -87,8 +88,8 @@ class ProductListItemDataSource (
 
     private fun getProducts(id: Long, direction: String) = runBlocking {
         try {
-            Log.d(TAG, "###getProducts id: $id, categoryId: $categoryId, direction: $direction")
-            BungeeApi.instance.getProducts(id, categoryId, direction)
+            Log.d(TAG, "###getProducts id: $id, categoryId: $categoryId, direction: $direction, keyword: $keyword")
+            BungeeApi.instance.getProducts(id, categoryId, direction, keyword)
         } catch (e: Exception) {
             Log.d(TAG, "###getProducts error message: ${e.message}")
             Log.d(TAG, "###getProducts error to string: ${e.toString()}")

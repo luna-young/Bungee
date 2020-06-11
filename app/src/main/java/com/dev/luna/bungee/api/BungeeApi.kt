@@ -40,7 +40,8 @@ interface BungeeApi {
     suspend fun getProducts(
             @Query("productId") productId: Long,
             @Query("categoryId") categoryId: Int?,
-            @Query("direction") direction: String // prev, next
+            @Query("direction") direction: String, // prev, next
+            @Query("keyword") keyword: String? = null
     ): ApiResponse<List<ProductListItemResponse>>
 
     @GET("/api/v1/products/{id}")
