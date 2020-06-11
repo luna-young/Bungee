@@ -1,5 +1,6 @@
 package com.dev.luna.bungee.product.list
 
+import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.dev.luna.bungee.App
 import com.dev.luna.bungee.api.ApiResponse
@@ -16,14 +17,20 @@ class ProductListItemDataSource (
 ) : PageKeyedDataSource<Long, ProductListItemResponse>() { //PageKeyedDataSource를 상속받는 클래스. 초기 데이터를 로드하고, 이전/이후의 데이터를 로드하기 위한 콜백으로 구성
 
 
+    private val TAG = ProductListItemDataSource::class.java.simpleName
+
     //초기 데이터를 로드하는 콜백. 상품을 최신순으로 읽어와야 하므로 id를 Long.MAX_VALUE로 사용
     override fun loadInitial(params: LoadInitialParams<Long>,
                              callback: LoadInitialCallback<Long, ProductListItemResponse>
     ) {
+        Log.d(TAG, "### loadInitial")
         val response = getProducts(Long.MAX_VALUE, NEXT)
         if(response.success) {
+            Log.d(TAG, "### response.success-> message: ${response.message}")
             response.data?.let{
-                if(it.isEmpty()) { //api로부터 데이터 수신 후 callback.onResult()를 통해 데이터가 추가되었음을 알려야
+                Log.d(TAG, "### response.data-> data: ${response.data}")
+
+                if(it.isNotEmpty()) { //api로부터 데이터 수신 후 callback.onResult()를 통해 데이터가 추가되었음을 알려야
                     callback.onResult(it, it.first().id, it.last().id)
                 }
             }
@@ -38,10 +45,15 @@ class ProductListItemDataSource (
     override fun loadAfter(params: LoadParams<Long>,
                            callback: LoadCallback<Long, ProductListItemResponse>
     ) {
+        Log.d(TAG, "### loadAfter")
+
         val response = getProducts(params.key, NEXT)
         if(response.success) {
+            Log.d(TAG, "### response.success-> message: ${response.message}")
+            Log.d(TAG, "### response.data-> data: ${response.data}")
+
             response.data?.let{
-                if(it.isEmpty())
+                if(it.isNotEmpty())
                     callback.onResult(it, it.last().id) //이전의 데이터 목록을 불러오기 위해 두번째 파라미터로 받은 api로부터 받은 마지막 데이터의 id를 넘겨줌
             }
         } else {
@@ -54,10 +66,15 @@ class ProductListItemDataSource (
     //더 나중에 등록된 데이터를 불러오기 위해 사용됨
     override fun loadBefore(params: LoadParams<Long>, callback: LoadCallback<Long, ProductListItemResponse>
     ) {
+        Log.d(TAG, "### loadBefore")
+
         val response = getProducts(params.key, PREV)
         if(response.success) {
+            Log.d(TAG, "### response.success-> message: ${response.message}")
+            Log.d(TAG, "### response.data-> data: ${response.data}")
+
             response.data?.let{
-                if(it.isEmpty())
+                if(it.isNotEmpty())
                     callback.onResult(it, it.first().id)
             }
         } else {
@@ -70,8 +87,12 @@ class ProductListItemDataSource (
 
     private fun getProducts(id: Long, direction: String) = runBlocking {
         try {
+            Log.d(TAG, "###getProducts id: $id, categoryId: $categoryId, direction: $direction")
             BungeeApi.instance.getProducts(id, categoryId, direction)
         } catch (e: Exception) {
+            Log.d(TAG, "###getProducts error message: ${e.message}")
+            Log.d(TAG, "###getProducts error to string: ${e.toString()}")
+
             ApiResponse.error<List<ProductListItemResponse>>(
                     "알 수 없는 오류가 발생했습니다 @ getProducts"
             )

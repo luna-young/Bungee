@@ -23,8 +23,8 @@ class ProductListFragment : BaseFragment<ProductListViewModel>() {
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
-
+            savedInstanceState: Bundle?
+    ): View? {
             val viewModel = getViewModel()
             viewModel.categoryId = categoryId
 

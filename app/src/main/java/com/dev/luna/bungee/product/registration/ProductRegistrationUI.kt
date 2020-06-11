@@ -74,8 +74,6 @@ class ProductRegistrationUI(
                 }
             }
 
-
-
             textInputLayout {
                 topPadding = dip(20)
                 textInputEditText {
@@ -92,7 +90,7 @@ class ProductRegistrationUI(
                     leftPadding = dip(4)
                     textSize = 12f
                     textColorResource = R.color.colorPrimary
-                    bindString(ui.owner, viewModel.productNameLength)
+                    bindString(ui.owner, viewModel.descriptionLength)
                 }
             }
 

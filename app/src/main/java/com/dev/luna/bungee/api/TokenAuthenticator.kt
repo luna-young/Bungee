@@ -33,6 +33,7 @@ class TokenAuthenticator : Authenticator, AnkoLogger {
                     Prefs.refreshToken = null
                 }
 
+                Log.d(TAG, "---토큰 재요청")
                 Prefs.token?.let{
                     token ->
                     response.request()

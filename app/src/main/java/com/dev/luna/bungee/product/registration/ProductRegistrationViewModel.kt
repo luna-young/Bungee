@@ -41,7 +41,7 @@ class ProductRegistrationViewModel (app: Application) : BaseViewModel(app) {
     val productNameLimit = 40
 
     val productNameLength = MutableLiveData("0/$productNameLimit")
-    val descriptionNameLength = MutableLiveData("0/$descriptionLimit")
+    val descriptionLength = MutableLiveData("0/$descriptionLimit")
 
     var currentImageNum = 0
 
@@ -59,7 +59,7 @@ class ProductRegistrationViewModel (app: Application) : BaseViewModel(app) {
             if(it.length > descriptionLimit) {
                 description.value = it.take(descriptionLimit)
             }
-            description.value = "${description.value?.length}/$descriptionLimit"
+            descriptionLength.value = "${description.value?.length}/$descriptionLimit"
         }
     }
 

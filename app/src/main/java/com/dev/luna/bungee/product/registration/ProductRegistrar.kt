@@ -1,5 +1,6 @@
 package com.dev.luna.bungee.product.registration
 
+import android.util.Log
 import com.dev.luna.bungee.api.ApiResponse
 import com.dev.luna.bungee.api.BungeeApi
 import com.dev.luna.bungee.api.request.ProductRegistrationRequest
@@ -15,6 +16,7 @@ import retrofit2.Response
 * */
 class ProductRegistrar : AnkoLogger {
 
+    private val TAG = ProductRegistrar::class.java.simpleName
     suspend fun register(request: ProductRegistrationRequest) = when {
         request.isNotValidName ->
             ApiResponse.error("상품명을 조건에 맞게 입력해주세요.")
@@ -28,6 +30,7 @@ class ProductRegistrar : AnkoLogger {
             ApiResponse.error("이미지를 한 개 이상 입력해주세요.")
         else -> withContext(Dispatchers.IO) {
             try {
+                Log.d(TAG, "### register request: $request")
                 BungeeApi.instance.registerProduct(request)
             } catch (e: Exception) {
                 error("상품 등록 오류", e)
