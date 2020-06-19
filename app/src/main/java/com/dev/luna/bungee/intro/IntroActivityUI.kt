@@ -12,7 +12,7 @@ class IntroActivityUI : AnkoComponent<IntroActivity> {
         return ui.relativeLayout {
             gravity = Gravity.CENTER
 
-            textView("Bungee!") {
+            textView("My Closet") {
                 textSize = 24f
                 textColorResource = R.color.colorPrimary
                 typeface = Typeface.DEFAULT_BOLD

@@ -29,7 +29,9 @@ class ImageSliderAdapter: PagerAdapter() {
                 .imageView().apply {
                    Glide.with(this)
                            .load("${ApiGenerator.HOST}${imageUrls[position]}")
+                           .into(this)
                 }
+        container.addView(view)
         return view
     }
     //빈 리스트를 api로부터 받아온 이미지로 교체해주기 위한 함수

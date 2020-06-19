@@ -1,6 +1,7 @@
 package com.dev.luna.bungee.product.detail
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dev.luna.bungee.api.ApiResponse
@@ -16,6 +17,8 @@ import java.lang.Exception
 import java.text.NumberFormat
 
 class ProductDetailViewModel(app: Application) : BaseViewModel(app) {
+
+    private val TAG = ProductDetailViewModel::class.java.simpleName
 
     val productId: Long? = null
 
@@ -58,6 +61,7 @@ class ProductDetailViewModel(app: Application) : BaseViewModel(app) {
         description.value = product.description
         price.value =
                 "${commaSeparatedPrice} $soldOutString"
+        Log.d(TAG, "상품 이미지주소: ${product.imagePaths}")
         imageUrls.addAll(product.imagePaths)
     }
 

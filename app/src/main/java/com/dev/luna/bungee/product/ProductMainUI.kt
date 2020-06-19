@@ -43,7 +43,7 @@ class ProductMainUI(
                frameLayout {
                    verticalLayout {
                        toolBar = toolbar {
-                           title = "Bungee"
+                           title = "My Closet"
                            bottomPadding = dip(1)
                            background = borderBottom(width = dip(1))
                            menu.add("Search")
@@ -79,6 +79,8 @@ class ProductMainUI(
                    }
                    floatingActionButton {
                        imageResource = R.drawable.ic_add
+                       backgroundResource = R.color.colorPrimary
+                       // = R.color.colorPrimary
                        onClick { viewModel.openRegistrationActivity() }
                    }.lparams {
                        bottomMargin = dip(20)
@@ -95,9 +97,9 @@ class ProductMainUI(
 
                    menu.apply {
                        //groupId, itemId, order, title
-                       add(NONE, MENU_ID_INQUIRY, NONE, "내 문의").apply {
+                      /* add(NONE, MENU_ID_INQUIRY, NONE, "내 문의").apply {
                            setIcon(R.drawable.ic_chat)
-                       }
+                       }*/
                        add(NONE, MENU_ID_LOGOUT, NONE, "로그아웃").apply {
                            setIcon(R.drawable.ic_signout)
                        }

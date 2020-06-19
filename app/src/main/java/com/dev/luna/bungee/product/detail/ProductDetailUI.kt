@@ -89,13 +89,13 @@ class ProductDetailUI(
                     backgroundColor = Color.DKGRAY
                     lparams(matchParent, wrapContent)
 
-                    button("상품 문의") {
+                   /* button("상품 문의") {
                         onClick { viewModel.openInquiryActivity() }
-                    }
+                    }*/
                 }
 
                 //스크롤뷰 영역과 하단바 영역에 대한 위치 설정
-                applyConstraintSet {
+               /* applyConstraintSet {
                     fixedBar.id {
                         connect(
                                 BOTTOM to BOTTOM of PARENT_ID
@@ -108,7 +108,7 @@ class ProductDetailUI(
                                 BOTTOM to TOP of fixedBar
                         )
                     }
-                }
+                }*/
             }
 
 }

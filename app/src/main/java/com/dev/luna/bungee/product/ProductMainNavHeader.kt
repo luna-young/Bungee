@@ -16,7 +16,7 @@ class ProductMainNavHeader : AnkoComponent<View> {
                 padding = dip(20)
                 background = borderBottom(width = dip(1))
 
-                imageView(R.drawable.ic_elephant_64)
+                imageView(R.drawable.hanger_64)
                         .lparams(dip(54), dip(54))
 
                 textView(Prefs.userName) {
